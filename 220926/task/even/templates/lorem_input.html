@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <div class="wrap position-absolute top-50 start-50 translate-middle">
+    <form action="/lorem-check" class="d-flex flex-column align-items-center">
+      문단의 수 <input type="text" name="_count"><br/>
+      문단별 단어의 수 <input type="text" name="_text"><br/>
+      <input type="submit" class="btn btn-primary">
+    </form>
+  </div>
+  
+{% endblock content %}
+  
