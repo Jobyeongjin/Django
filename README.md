@@ -1,1 +1,1 @@
-# Django Start 👍
+# Django Start 🚀
