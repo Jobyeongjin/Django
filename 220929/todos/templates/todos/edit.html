@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form action="{% url 'todos:rewrite' todo.pk %}">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="content" maxlength="20" value="{{ todo.content }}">
+    <button type="submit" class="btn btn-outline-light">수정완료</button>
+  </div>
+</form>
+
+{% endblock content %}
+  

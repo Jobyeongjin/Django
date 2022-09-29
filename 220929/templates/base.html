@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Fontawesome -->
+  <script defer src="https://kit.fontawesome.com/3ef4088aa9.js" crossorigin="anonymous"></script>
+  <!-- CSS -->
+  <style>
+    body {
+      background-image: url(https://i.pinimg.com/564x/ae/7f/55/ae7f553e968b876a3808930d5b7b5ce1.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    h1 {
+      background: -webkit-linear-gradient(#fff, #333);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    th, td {
+      text-align: center;
+      line-height: 35px;
+      color: #fff;
+    }
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .true {
+      text-decoration: line-through;
+      opacity: .2;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    {% block content %}
+
+    {% endblock content %}
+  </div>
+
+</body>
+</html>

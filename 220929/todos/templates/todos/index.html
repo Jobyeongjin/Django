@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <h1 class="title">To-Do List</h1>
+
+  <!-- Form -->
+  <form action="{% url 'todos:create' %}">
+    <!-- Content -->
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="content" maxlength="20" placeholder="새로 작성하기">
+    </div>
+    <!-- Priority -->
+    <div class="input-group mb-3">
+      <select class="form-select" id="inputGroupSelect01" name="priority">
+        <option selected>선택하기</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <!-- Deadline -->
+    <div class="input-group mb-3">
+      <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="deadline">
+    </div>
+    <button type="submit" class="btn btn-outline-light w-100">할 일 추가</button>
+  </form>
+
+  <hr>
+  
+  <!-- Table -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">우선 순위</th>
+        <th scope="col">할 일</th>
+        <th scope="col">생성 날짜</th>
+        <th scope="col">마감 기한</th>
+        <th scope="col">진행 상태</th>
+        <th scope="col">상태 변경</th>
+        <th scope="col">수정</th>
+        <th scope="col">삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for todo in todos %}
+        <tr>
+
+          {% if todo.completed == False %}
+          <td>{{ todo.priority }}</td>
+          <td>{{ todo.content }}</td>
+          <td>{{ todo.created|date:'Y년 m월 d일' }}</td>
+          <td>{{ todo.deadline|date:'Y년 m월 d일' }}</td>
+          <td>미완</td>
+          <td><a class="btn btn-outline-warning" href="{% url 'todos:update' todo.pk %}"><i class="fa-solid fa-repeat"></i></a></td>
+            <td><a class="btn btn-outline-primary" href="{% url 'todos:edit' todo.pk %}"><i class="fa-solid fa-pen"></i></td></a>
+            <td><a class="btn btn-outline-danger" href="{% url 'todos:delete' todo.pk %}"><i class="fa-solid fa-trash-can"></i></a></td>
+          {% endif %}
+          {% if todo.completed == True %}
+          <td>{{ todo.priority }}</td>
+          <td class="true">{{ todo.content }}</td>
+          <td class="true">{{ todo.created|date:'Y년 m월 d일' }}</td>
+          <td class="true">{{ todo.deadline|date:'Y년 m월 d일' }}</td>
+          <td class="true">완료</td>
+          <td><a class="btn btn-outline-warning" href="{% url 'todos:update' todo.pk %}"><i class="fa-solid fa-repeat"></i></a></td>
+          <td><a class="btn btn-outline-primary" href="{% url 'todos:edit' todo.pk %}"><i class="fa-solid fa-pen"></i></td></a>
+          <td><a class="btn btn-outline-danger" href="{% url 'todos:delete' todo.pk %}"><i class="fa-solid fa-trash-can"></i></a></td>
+          {% endif %}
+          
+        </tr>
+      {% endfor %}
+        
+    </tbody>
+  </table>
+
+{% endblock content %}
+  
