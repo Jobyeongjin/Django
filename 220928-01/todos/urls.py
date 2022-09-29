@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views 
 
 # url namespace -> url을 이름으로 분류하는 기능
 app_name = 'todos'

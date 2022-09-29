@@ -5,11 +5,13 @@
 {% block content %}
 
   <form action="{% url 'todos:create' %}">
+
     <!-- Content -->
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">할 일</span>
       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="content" maxlength="80">
     </div>
+
     <!-- Priority -->
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">우선 순위</label>
@@ -22,6 +24,7 @@
         <option value="5">5</option>
       </select>
     </div>
+    
     <!-- Deadline -->
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">마감 기한</span>
