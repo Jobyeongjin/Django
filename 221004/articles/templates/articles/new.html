@@ -1,0 +1,22 @@
+<!-- base.html에서 확장하기 -->
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <h1>글쓰기</h1>
+  <!-- Form action: 서버에 데이터를 전송 -->
+  <!-- Form method: 데이터 전송 방식 -->
+  <!-- GET: 데이터 요청시 사용 -->
+  <!-- POST: 서버에 리소스 생성, 업데이트시 사용 -->
+  <form action="{% url 'articles:create' %}" method="post">
+    <!-- CSRF(Cross site Request Forgery): 사이트 간 요청 위조 -->
+    <!-- Django에서는 csrf 방어를 위해 token을 제공함으로 유효성 검증 후 처리를 요함 -->
+    {% csrf_token %}
+    {{ article_form.as_p }}
+    <!-- Type submit: 데이터 제출하기 -->
+    <button type="submit" class="btn btn-primary">저장</button>
+  </form>
+
+  {% endblock content %}
+  

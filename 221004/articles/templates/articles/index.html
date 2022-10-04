@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  
+  <a href="{% url 'articles:new' %}">글쓰기</a>
+  
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">리뷰 번호</th>
+        <th scope="col">리뷰 제목</th>
+        <th scope="col">작성 시간</th>
+      </tr>
+    </thead>
+      <!-- views.py의 index 함수에서 리턴 값으로 넘어온 Article 객체들을 반복문으로 처리 -->
+      {% for article in articles %} 
+        <tbody>
+          <tr>
+            <td>{{ article.id }}</td> 
+            <!-- title을 누르면 a태그의 링크를 통해 해당 url로 이동 // pk값도 함께 전달 -->
+            <td><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></td>
+            <td>{{ article.created_at }}</td>
+          </tr>
+        </tbody>
+      {% endfor %}
+  </table>
+  
+
+{% endblock content %}
+  

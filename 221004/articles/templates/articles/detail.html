@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<!-- 랜더링한 특정 pk값을 가진 객체의 제목과 내용 화면으로 출력  -->
+<h1>{{ article.title }}</h1>
+<p>{{ article.content }}</p>
+<!-- a 태그의 링크를 활용해 url(update, delete) 이동 -->
+<!-- 특정 객체를 수정하고 삭제하기 위해서는 고유한 값인 pk값을 함께 전달 -->
+<a href="{% url 'articles:update' article.pk %}">리뷰 수정</a>
+<a href="{% url 'articles:delete' article.pk %}">리뷰 삭제</a>
+
+{% endblock content %}
