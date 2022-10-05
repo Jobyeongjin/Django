@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+<!-- views.py의 detail 함수에서 리턴 값으로 넘어온 특정한(pk) 객체의 제목과 내용을 화면에 출력 -->
+<h1>제목: {{ article.title }} </h1>
+<p>{{ article.content }}</p>
+<!-- a 태그의 링크를 활용해 url(update, delete) 이동 -->
+<!-- 특정 객체를 보기 위해서는 고유한 값인 pk 값을 함께 전달 -->
+<a href="{% url 'articles:update' article.pk %}">리뷰 수정</a>
+<a href="{% url 'articles:delete' article.pk %}">리뷰 삭제</a>
+<!-- a 태그의 링크를 활용해 url(index) 이동 -->
+<a href="{% url 'articles:index' %}">목록으로 이동</a>
+
+{% endblock content %}
+  

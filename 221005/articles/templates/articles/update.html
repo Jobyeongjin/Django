@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+<!-- 👇 Django-bootstrap 적용하기 👇 -->
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+{% block content %}
+
+<h1>글수정하기</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <!-- 👇 Django-bootstrap 사용하기 👇 -->
+  <!-- 👉 문서 확인 👉 https://django-bootstrap-v5.readthedocs.io/en/latest/templatetags.html#bootstrap-form -->
+  {% bootstrap_form article_form %}
+  {% bootstrap_button "수정하기" button_type="submit" button_class="btn-primary" %}
+</form>
+
+{% endblock content %}
