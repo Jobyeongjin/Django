@@ -1,0 +1,32 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
+.navbar {
+  z-index: 99;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.contentcard {
+  transition: all ease-in-out .3s;
+}
+
+.contentcard:hover {
+  transform: translateY(-10px);
+  text-decoration: none;
+}
+
+.card-p {
+  overflow: hidden;
+  word-wrap: break-word;
+}

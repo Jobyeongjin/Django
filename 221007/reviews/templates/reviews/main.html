@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  
+<div class="d-flex justify-content-center my-5">
+  <div class="d-flex justify-content-center flex-wrap p-2 pb-5" style="width: 1440px;">
+    {% for movie in movie_info %}
+    <a href="{% url 'review:create' movie.pk %}">
+      <div class="mt-2 mb-4 mx-3 contentcard"
+        style="width: 311px; box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%); border-radius: 15px;">
+        <div class="card-top">
+          <div>
+            <img style="width: 311px; height: 350px; border-radius: 15px 15px 0 0;" src="{{ movie.image.url }}">
+          </div>
+        </div>
+        <div class="card-body p-4" style="border-radius: 0 0 15px 15px; position: relative;">
+          <div class="">
+            <h3 class="">{{ movie.movie_name }}</h3>
+            <p class="m-0">{{ movie.director }} <span class="fw-lighter">| {{ movie.release}} </span>
+            </p>
+            <p class="m-0"><span style="color: #ff0558">★</span>{{ movie.movie_grade|floatformat }} </p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+  
