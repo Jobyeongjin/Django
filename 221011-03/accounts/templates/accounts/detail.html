@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{{ user.id }}<br/>
+{{ user.password }}<br/>
+{{ user.last_login }}<br/>
+{{ user.is_superuser }}<br/>
+{{ user.username }}<br/>
+{{ user.first_name }}<br/>
+{{ user.last_name }}<br/>
+{{ user.email }}<br/>
+{{ user.is_staff }}<br/>
+{{ user.is_active }}<br/>
+{{ user.date_joined }}<br/>
+{% endblock content %}
+  

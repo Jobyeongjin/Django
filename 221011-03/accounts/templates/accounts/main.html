@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<a class="btn btn-primary mb-3" href="{% url 'account:signup' %}" role="button">회원 가입</a>
+<a class="btn btn-primary" href="{% url 'account:index' %}" role="button">회원 목록</a>
+{% endblock content %}
+  
