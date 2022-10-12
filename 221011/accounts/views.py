@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUser
 from .models import User
+from django.contrib.auth import get_user_model
 
 
 def main(request):
@@ -22,7 +23,7 @@ def signup(request):
 
 
 def index(request):
-    users = User.objects.all()
+    users = get_user_model().objects.all()
 
     return render(request, 'accounts/index.html',
     {
@@ -31,4 +32,8 @@ def index(request):
 
 
 def detail(request, pk):
-    return render(request, 'accounts/detail.html')
+    user = get_user_model().objects.get(pk=pk)
+    return render(request, 'accounts/detail.html', 
+    {
+        'user': user,
+    })
