@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<h1>회원 ID: {{ user }}</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">pk</th>
+      <th scope="col">name</th>
+      <th scope="col">email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.pk }}</td>
+      <td><a href="{% url 'user:detail' user.pk %}">{{ user.username }}</a></td>
+      <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'user:main' %}">메인으로 이동 <i class="fa-solid fa-arrow-right"></i></a>
+
+{% endblock content %}
+  

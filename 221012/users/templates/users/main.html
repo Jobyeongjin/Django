@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+<!-- 로그인한 유저인지 확인💡 -->
+<!-- 참이라면 if문 실행, 거짓이라면 else문 실행💡 -->
+{% if user.is_authenticated %}
+  <!-- context 데이터없이 user 변수를 사용하는 이유💡 -->
+  <!-- -> 작성된 context 데이터는 기본적으로 템플릿에서 사용 가능한 변수로 포함됨 -->
+  <!-- 👉 settings.py > TEMPLATES > 'django.contrib.auth.context_processors.auth' 👈 -->
+  <h1>회원 ID: <a href="{% url 'user:detail' user.pk %}">{{ user }} <i class="fa-solid fa-arrow-right"></i></a></h1>
+  <a class="btn btn-primary mb-3" href="{% url 'user:logout' %}" role="button">로그아웃</a>  
+{% else %}
+<a class="btn btn-primary mb-3" href="{% url 'user:login' %}" role="button">로그인</a>
+<a class="btn btn-primary mb-3" href="{% url 'user:signup' %}" role="button">회원가입</a>
+{% endif %}
+
+{% endblock content %}
+  
+
