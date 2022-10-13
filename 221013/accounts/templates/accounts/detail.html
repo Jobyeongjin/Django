@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h1>회원정보</h1>
+<a href="{% url 'account:index' %}">목록으로 이동 <i class="fa-solid fa-arrow-right"></i></a>
+<a href="{% url 'account:update' %}">회원정보 수정 <i class="fa-solid fa-arrow-right"></i></a>
+id: {{ user.id }}<br/>
+password: {{ user.password }}<br/>
+last_login: {{ user.last_login }}<br/>
+is_superuser: {{ user.is_superuser }}<br/>
+username: {{ user.username }}<br/>
+email: {{ user.email }}<br/>
+{% endblock content %}
+  

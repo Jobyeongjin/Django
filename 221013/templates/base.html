@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/3ef4088aa9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">LOGO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'account:main' %}">메인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account:index' %}">회원목록</a>
+          </li>
+          
+          {% if request.user.is_authenticated %}
+          <li class="nav-item d-flex align-items-center">
+            <a class="nav-link" href="{% url 'account:logout' %}">로그아웃</a>
+            <a href="{% url 'account:detail' request.user.pk %}"><i class="fa-solid fa-gear fa-xl"></i></a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account:login' %}">로그인</a>
+          </li>
+          {% endif %}
+            
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+    {% block content %}
+      
+    {% endblock content %}
+  </div>
+    
+
+
+</body>
+</html>

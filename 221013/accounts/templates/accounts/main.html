@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  
+  {% if request.user.is_authenticated %}
+  <h1>로그인 성공 🥂</h1>
+  <p style="opacity: .8;">{{ request.user.full_name }}님, 안녕하세요!!!</p>
+  <h1>회원 ID: <a href="{% url 'account:detail' user.pk %}">{{ request.user.username }}</a></h1>
+  <a class="btn btn-primary mb-3" href="{% url 'account:logout' %}" role="button">로그아웃</a>
+  <a class="btn btn-primary" href="{% url 'account:index' %}" role="button">회원목록</a>
+    
+  {% else %}
+  <a class="btn btn-primary mb-3" href="{% url 'account:signup' %}" role="button">회원가입</a>
+  <a class="btn btn-primary mb-3" href="{% url 'account:login' %}" role="button">로그인</a>
+  {% endif %}
+    
+
+
+{% endblock content %}
+  
