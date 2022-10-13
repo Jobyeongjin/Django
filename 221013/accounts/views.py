@@ -81,8 +81,9 @@ def logout(request):
 """회원정보 수정"""
 @login_required
 def update(request):
+    # 👉 from .forms import CustomCreationUser, CustomChangeUser 👈
     # 회원수정 폼 사용해 요청받은 정보를 입력하고, 검증한 뒤 저장💡
-    # -> 수정을 해야하니 기존 정보도 넣기💡
+    # -> 수정을 해야하니 유저 정보도 함께(instance) 넣기💡
     if request.method == 'POST':
         form = CustomChangeUser(request.POST, instance=request.user)
         if form.is_valid():
