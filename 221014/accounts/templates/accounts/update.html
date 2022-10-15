@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+  
+  <a href="{% url 'account:detail' user.pk %}">뒤로가기</a>
+  <a href="{% url 'account:set_password' %}">비밀번호 변경</a>
+  <a href="{% url 'account:delete' %}">회원탈퇴</a>
+  <form action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+  </form>
+
+</div>
+{% endblock content %}
+  

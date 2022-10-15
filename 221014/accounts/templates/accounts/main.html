@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+  
+  {% if request.user.is_authenticated %}
+  <h1>{{ request.user.username }}님, 안녕하세요</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'account:index' %}" role="button">회원목록</a>
+  <a class="btn btn-primary mb-3" href="{% url 'account:logout' %}" role="button">로그아웃</a>
+  {% else %}
+  <a class="btn btn-primary mb-3" href="{% url 'account:signup' %}" role="button">회원가입</a>
+  <a class="btn btn-primary mb-3" href="{% url 'account:login' %}" role="button">로그인</a>
+  {% endif %}
+    
+
+</div>
+{% endblock content %}
+  
