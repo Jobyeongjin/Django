@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+
+  <form action='' method="POST" class="text-dark bg-body p-5" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="text-center">
+      <h3>리뷰 작성</h3>
+    </div>
+    <div class="my-3">
+      {{ form.title|attr:"placeholder:제목"}}
+    </div>
+    <div class="my-2">
+      {{ form.content|attr:"placeholder:내용"}}
+    </div>
+    <div class="my-2 mb-3">
+      {{ form.gift_card|attr:"placeholder:선물 내용"}}
+    </div>
+    <div class="my-2">
+      <div style="color:gold;">
+        <span style="color:black">만족도 :</span>
+        {% for radio in form.grade %}
+        &nbsp; &nbsp;{{ radio }}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="my-1">
+      필수&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ form.image1 }}
+    </div>
+    <div class="my-1">
+      선택&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ form.image2 }}
+    </div>
+    <div class="my-1 mb-5">
+      선택&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{ form.image3 }}
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-secondary">저장-✨</button>
+    </div>
+  </form>
+
+</div>
+{% endblock content %}

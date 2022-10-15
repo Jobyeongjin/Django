@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center" style="height:100vh;">
+
+<a href="{% url 'review:index' %}">목록으로 이동</a>
+<a href="{% url 'review:update' review.pk %}">리뷰 수정</a>
+<a href="{% url 'review:delete' review.pk %}">리뷰 삭제</a>
+{{ review.title }}
+{{ review.content }}
+
+</div>
+{% endblock content %}
+  
