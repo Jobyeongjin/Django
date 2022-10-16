@@ -4,14 +4,37 @@
 {% bootstrap_javascript %}
 
 {% block content %}
-<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
-  
-  <form action="" method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
-  </form>
+<div class="container d-flex flex-column justify-content-center" style="height:100vh; width:400px;">
+
+  <div class="login-wrap">
+    <div class="login-cover"></div>
+    <div class="login-top mb-3">
+      <h4>로그인</h4>
+      <p>비밀번호를 잊어버리셨나요?</p>
+    </div>
+    <div class="login-form">
+      <form action="" method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="d-flex justify-content-center">
+          <button class="login-btn me-5" type="submit">로그인</button>
+          <a class="login-btn" href="{% url 'account:signup' %}">회원가입</a>
+        </div>
+      </form>
+    </div>
+    <hr style="color: #fff;">
+    <div class="login-bottom">
+      <p class="login-text mb-3">다른 방법으로 로그인하기</p>
+      <div class="login-link">
+        <i class="fa-solid fa-comment fa-2x"></i>
+        <i class="fa-brands fa-google fa-2x"></i>
+        <i class="fa-brands fa-facebook fa-2x"></i>
+        <i class="fa-brands fa-twitter fa-2x"></i>
+        <i class="fa-brands fa-apple fa-2x"></i>
+        <i class="fa-brands fa-line fa-2x"></i>
+      </div>
+    </div>
+  </div>
 
 </div>
-{% endblock content %}
-  
+{% endblock %}

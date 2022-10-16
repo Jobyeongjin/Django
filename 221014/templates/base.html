@@ -16,34 +16,40 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'account:main' %}">LOGO</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand text-white" href="{% url 'account:main' %}">LOGO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          
           {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'account:logout' %}">LOGOUT</a>
+            <a class="nav-link text-white" href="{% url 'account:logout' %}">LOGOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white gear" href="{% url 'account:detail' request.user.pk %}"><i class="fa-solid fa-gear fa-lg"></i></a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'account:login' %}">LOGIN</a>
+            <a class="nav-link text-white" href="{% url 'account:login' %}">LOGIN</a>
           </li>
           {% endif %}
-            
         </ul>
       </div>
     </div>
   </nav>
   
+
+  <!-- Cover -->
+  {% block cover %}
+  {% endblock cover %}
+    
   
   <!-- Content -->
   {% block content %}
-
   {% endblock content %}
     
 

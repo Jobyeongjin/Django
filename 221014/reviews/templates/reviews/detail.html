@@ -5,12 +5,40 @@
 {% block content %}
 <div class="container d-flex flex-column justify-content-center" style="height:100vh;">
 
-<a href="{% url 'review:index' %}">목록으로 이동</a>
-<a href="{% url 'review:update' review.pk %}">리뷰 수정</a>
-<a href="{% url 'review:delete' review.pk %}">리뷰 삭제</a>
-{{ review.title }}
-{{ review.content }}
+  <div class="container justify-content-center">
+    <div class="card shadow p-3 mb-5 rounded"
+      style="width: 40rem; height: 50rem; margin:auto; background-color: white; opacity:1;">
+      <div class="card-body text-center d-flex flex-column justify-content-between">
+        <div>
+          <h3 class="card-title" style="letter-spacing:-1px;">{{review.title}}</h3>
+          <hr>
+          <h6 class="card-subtitle mb-2 ">{% for i in ''|ljust:review.grade %}⭐{% endfor %}</h6>
+        </div>
+        <div>
+          {% if review.image1 %}
+          <img src="{{ review.image1.url }}" style="width:25rem;">
+          {% endif %}
+        </div>
+        <div>
+          {% if review.image2 %}
+          <img src="{{ review.image2.url }}" style="width:25rem;">
+          {% endif %}
+        </div>
+        <div>
+          {% if review.image3 %}
+          <img src="{{ review.image3.url }}" style="width:25rem;">
+          {% endif %}
+        </div>
+        <div>
+          <p class="card-text">{{review.content}}</p>
+        </div>
+        <div>
+          <a class="btn btn-outline-secondary" href="{% url 'review:update' review.pk %}">수정-✨</a>
+          <a class="btn btn-outline-secondary" href="{% url 'review:delete' review.pk %}">삭제-✨</a>
+          <a class="btn btn-outline-secondary" href="{% url 'review:index' %}">목록으로-✨</a>
+        </div>
+      </div>
+    </div>
 
-</div>
-{% endblock content %}
-  
+  </div>
+  {% endblock %}

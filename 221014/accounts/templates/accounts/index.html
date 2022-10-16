@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
-<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+<div class="container d-flex flex-column justify-content-center" style="height:100vh;">
 
-  <a href="{% url 'account:main' %}"><i class="fa-solid fa-arrow-left"></i> 메인으로이동</a>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">pk</th>
-        <th scope="col">username</th>
-        <th scope="col">email</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      {% for user in users %}
-      <tr>
-        <td>{{ user.pk }}</td>
-        <td><a href="{% url 'account:detail' user.pk %}">{{ user.username }}</a></td>
-        <td>{{ user.email }}</td>
-      </tr>
-      {% endfor %}
-
-    </tbody>
-  </table>
+  <div class="idx-table d-flex flex-column">
+    <div class="idx-cover"></div>
+    <a class="" href="{% url 'account:main' %}"><i class="fa-solid fa-arrow-left"></i> 메인으로 이동</a>
+    <!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">이름</th>
+          <th scope="col">이메일</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for uesr in users %}
+        <tr>
+          <td>{{ user.pk }}</td>
+          <td><a href="{% url 'account:detail' user.pk %}">{{ user.username }}</a></td>
+          <td>{{ user.email }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 </div>
-{% endblock content %}
+{% endblock %}

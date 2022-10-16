@@ -1,20 +1,17 @@
 {% extends 'base.html' %}
-
 {% load widget_tweaks %}
 {% load django_bootstrap5%}
 
 
 {% block content %}
 <div class="container d-flex flex-column justify-content-center" style="height:100vh;">
-
-  <form action="" method="post" class="text-dark bg-body p-5">
+  
+  <form action="" method="POST" class="text-dark bg-body p-5">
     {% csrf_token %}
 
     <div class="text-center d-flex justify-content-center">
-      <a class="me-auto" href="{% url 'review:index' %}">
-        <i class="fa-solid fa-arrow-left"></i> 
-        <span class="fs-6">목록으로</span>
-      </a>
+      <a class="me-auto" href="{% url 'review:index' %}"><i class="fa-solid fa-arrow-left"></i> <span
+          class="fs-6">목록으로</span></a>
       <h2>리뷰 작성</h2>
     </div>
 
@@ -47,7 +44,7 @@
     <div class="d-flex justify-content-end">
       <button type="submit" class="btn btn-outline-secondary">수정-✨</button>
     </div>
-  </form>
 
+  </form>
 </div>
 {% endblock %}

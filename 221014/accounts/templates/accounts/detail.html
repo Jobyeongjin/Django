@@ -5,18 +5,23 @@
 {% block content %}
 <div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
 
-  <a href="{% url 'account:index' %}"><i class="fa-solid fa-arrow-left"></i> 목록으로이동</a>
-  <a href="{% url 'account:update' %}">회원정보 수정</a>
-{{ user.id }}<br/>
-{{ user.password }}<br/>
-{{ user.last_login }}<br/>
-{{ user.is_superuser }}<br/>
-{{ user.username }}<br/>
-{{ user.email }}<br/>
-{{ user.first_name }}<br/>
-{{ user.last_name }}<br/>
-
+  <div class="container d-flex flex-column justify-content-center" style="height:100vh;">
+    <div class="detail-wrap">
+      <div class="detail-cover"></div>
+      <div class="detail-link d-flex justify-content-between mb-3">
+        <a href="{% url 'account:index' %}"><i class="fa-solid fa-arrow-left"></i> 목록으로</a>
+        <a href="{% url 'account:update' %}">회원정보 수정 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      id | {{ user.id }}<br />
+      last_login | {{ user.last_login }}<br />
+      is_superuser | {{ user.is_superuser }}<br />
+      username | {{ user.username }}<br />
+      first_name | {{ user.first_name }}<br />
+      last_name | {{ user.last_name }}<br />
+      email | {{ user.email }}<br />
+      <a class="trash" href="{% url 'account:delete' %}"><i class="fa-regular fa-trash-can fa-2x"></i></a>
+    </div>
+  </div>
 
 </div>
 {% endblock content %}
-  

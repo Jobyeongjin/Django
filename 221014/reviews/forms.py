@@ -1,6 +1,6 @@
 from turtle import textinput
 from .models import Review
-from django.forms import ModelForm, Textarea, TextInput, RadioSelect, ClearableFileInput
+from django.forms import ModelForm, Textarea, TextInput, RadioSelect
 
 
 class ReviewForm(ModelForm):

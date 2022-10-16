@@ -3,15 +3,20 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
+
 {% block content %}
-<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
-  
-  <form action="" method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
-  </form>
+<div class="container d-flex flex-column justify-content-center" style="height:100vh;">
+
+  <div class="wrap">
+    <div class="cover"></div>
+    <form action="" method="POST" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <div class="d-flex justify-content-end">
+        {% bootstrap_button "저장" button_type="submit" button_class="btn-outline-dark" %}
+      </div>
+    </form>
+  </div>
 
 </div>
-{% endblock content %}
-  
+{% endblock %}

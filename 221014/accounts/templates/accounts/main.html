@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 
 
+{% block cover %}
+<div class="main-cover"></div>  
+{% endblock cover %}
+
 
 {% block content %}
-<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
-  
+<div class="container d-flex flex-column justify-content-center align-items-center" style="height:100vh;">
+
   {% if request.user.is_authenticated %}
-  <h1>{{ request.user.username }}님, 안녕하세요</h1>
-  <a class="btn btn-primary mb-3" href="{% url 'account:index' %}" role="button">회원목록</a>
-  <a class="btn btn-primary mb-3" href="{% url 'account:logout' %}" role="button">로그아웃</a>
+  <h1 class="text-white text-center">🎲 멀티캠퍼스 선물 이벤트 🎲</h1>
+  <p class="text-white text-center" style="opacity: .5;">무료입니다. 다 받아가세요!!!</p>
+  <a class="main-btn mt-5" href="{% url 'review:create' %}" role="button">리뷰쓰기</a>
+  <p class="text-white text-center mt-1">{{ request.user.username }}님! 선물은 마음에 드셨나요? 🎁</p>
   {% else %}
-  <a class="btn btn-primary mb-3" href="{% url 'account:signup' %}" role="button">회원가입</a>
-  <a class="btn btn-primary mb-3" href="{% url 'account:login' %}" role="button">로그인</a>
+  <h1 class="text-white text-center">🎲 멀티캠퍼스 선물 이벤트 🎲</h1>
+  <p class="text-white text-center" style="opacity: .5;">무료입니다. 다 받아가세요!!!</p>
+  <a class="main-btn mt-5" href="{% url 'account:login' %}" role="button">리뷰쓰기</a>
   {% endif %}
-    
+
 
 </div>
 {% endblock content %}
-  

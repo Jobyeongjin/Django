@@ -3,28 +3,24 @@
 
 
 {% block content %}
-<div class="container d-flex flex-column justify-content-center" style="height: 100vh;">
+<div class="container d-flex flex-column justify-content-center mt-5" style="height:100%;">
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">pk</th>
-        <th scope="col">title</th>
-        <th scope="col">content</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      {% for review in reviews %}
-      <tr>
-        <td>{{ review.pk }}</td>
-        <td><a href="{% url 'review:detail' review.pk %}">{{ review.title }}</a></td>
-        <td>{{ review.content }}</td>
-      </tr>
-      {% endfor %}
-
-    </tbody>
-  </table>
+  <div id="columns">
+    {% for review in reviews %}
+    <a href="{% url 'review:detail' review.pk %}">
+      <figure>
+        <div class="col-cover"></div>
+        <figcaption>
+          {% if review.image1 %}
+            <img src="{{ review.image1.url }}" style="width:15rem;">
+          {% endif %}
+        </figcaption>
+        <figcaption><span class="col-title">제목: {{ review.title }}</span></figcaption>
+        <figcaption><span class="col-text">내용: {{ review.content|slice:":20" }}</span></figcaption>
+      </figure>
+    </a>
+    {% endfor %}
+  </div>
 
 </div>
 {% endblock content %}
