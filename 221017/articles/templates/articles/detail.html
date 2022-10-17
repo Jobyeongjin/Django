@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<a href="{% url 'article:index' %}">목록으로이동</a>
+<a href="{% url 'article:update' article.pk %}">글수정</a>
+<a href="{% url 'article:delete' article.pk %}">글삭제</a>
+id: {{ article.id }}<br/>
+title: {{ article.title }}<br/>
+content: {{ article.content }}<br/>
+created_at: {{ article.created_at }}<br/>
+updated_at: {{ article.updated_at }}<br/>
+{% if article.image %}
+  img: <img src="{{ article.image.url }}" alt="" width="100px" height="100px"><br/>
+{% else %}
+  img: none
+{% endif %}
+{% if article.thumbnail %}
+  thumbnail: <img src="{{ article.thumbnail.url }}" alt="" width="100px" height="100px"><br/>
+{% else %}
+  thumbnail: none
+{% endif %}
+  
+{% endblock content %}
+  

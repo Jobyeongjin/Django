@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  
+<div class="container" style="height: 80vh; overflow:auto;">
+  <a href="{% url 'article:create' %}">글쓰기</a>
+  {% for article in articles %}
+  <div class="card mb-3" style="width: 18rem; margin: auto;">
+    <!-- 만일 썸네일이 있다면 아래 코드 실행💡 -->
+    {% if article.thumbnail %}
+    <!-- 이미지 주소 입력💡 -->
+    <img src="{{ article.thumbnail.url }}" class="card-img-top"><br />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ article.title }}</h5>
+      <p class="card-text">{{ article.content }}</p>
+      <a href="{% url 'article:detail' article.pk %}" class="btn btn-primary">Go somewhere</a>    
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
+  
