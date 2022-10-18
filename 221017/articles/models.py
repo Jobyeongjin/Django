@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 # 👉이미지 처리하기: https://github.com/matthewwithanm/django-imagekit👈
 from imagekit.models import ProcessedImageField
@@ -23,3 +24,9 @@ class Article(models.Model):
         options={'quality': 80},
         blank=True,
         )
+
+class Comment(models.Model):
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)

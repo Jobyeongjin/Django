@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from articles.forms import ArticleForm
+from .forms import ArticleForm, CommentForm
 from .models import Article
 
 
@@ -17,6 +17,7 @@ def create(request):
         # request.FILES: 템플릿 폼에서 요청받은 업로드 파일 객체로 확인💡
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
+
             form.save()
             return redirect('article:index')
     else:
@@ -29,9 +30,12 @@ def create(request):
 
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
+    form = CommentForm()
     return render(request, 'articles/detail.html',
     {
-        'article': article, 
+        'article': article,
+        'comments': article.comment_set.all(),
+        'form': form,
     })
 
 
@@ -53,3 +57,13 @@ def update(request, pk):
 def delete(request, pk):
     article = Article.objects.get(pk=pk).delete()
     return redirect('article:index')
+
+
+def comment_create(request, pk):
+    article = Article.objects.get(pk=pk)    
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.article = article
+        comment.save()
+        return redirect('article:detail', article.pk)
