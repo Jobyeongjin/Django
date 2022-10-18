@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block content %}
+
+  <h1>게시글 정보</h1>
+  <a href="{% url 'article:index' %}">목록으로 이동</a>
+  <a href="{% url 'article:update' article.pk %}">수정</a>
+  <a href="{% url 'article:delete' article.pk %}">삭제</a>
+  <div class="my-3">
+    제목: {{ article.title }}<br/>
+    내용: {{ article.content }}
+  </div>
+  
+  <!-- 댓글 생성 폼💡 -->
+  <form action="{% url 'article:comment_create' article.pk %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button "저장" button_type="submit" button_class="btn-primary" %}
+  </form>
+
+  <hr>
+  <!-- 댓글이 있다면 -->
+  {% if comments %}
+  <!-- 댓글 수 출력하기💡 -->
+  <p>댓글 수: {{ comments.count }}</p>
+  {% endif %}
+    
+  <!-- 댓글 출력💡 -->
+  {% for comment in comments %}
+    <p>{{ comment.content }}</p>
+    <a class="mb-3" href="{% url 'article:comment_update' article.pk comment.pk %}">{% bootstrap_button "수정" button_type="submit" button_class="btn-primary" %}</a>
+    <!-- 댓글 삭제 폼💡 -->
+    <form class="" action="{% url 'article:comment_delete' article.pk comment.pk %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_button "삭제" button_type="submit" button_class="btn-primary" %}
+    </form>
+    <hr>
+  <!-- 댓글이 없다면 -->
+  {% empty %}
+  <p>댓글이 없어요...</p>
+  {% endfor %}
+    
+
+{% endblock content %}
+  
