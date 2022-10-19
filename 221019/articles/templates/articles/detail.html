@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<a href="{% url 'article:index' %}">목록으로 이동</a>
+
+{% if request.user == article.user %}
+<a href="{% url 'article:update' article.pk %}">글 수정</a>
+<a href="{% url 'article:delete' article.pk %}">글 삭제</a>
+<h1>회원이름: <a href="{% url 'accounts:detail' user.pk %}">{{ article.user }}</a></h1>
+{% else %}
+user: {{ article.user }}<br/>
+{% endif %}
+
+title: {{ article.title }}<br/>
+content: {{ article.content }}<br/>
+
+{% endblock content %}
+  

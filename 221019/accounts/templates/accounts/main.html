@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <a href="{% url 'article:index' %}">글목록</a>
+  
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    <a href="{% url 'accounts:detail' user.pk %}">회원정보</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">로그인</a>
+    <a href="{% url 'accounts:signup' %}">회원가입</a>
+  {% endif %}
+    
+{% endblock content %}
+  

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  
+<a href="{% url 'accounts:main' %}">메인으로 이동</a>
+<a href="{% url 'article:create' %}">글쓰기</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">title</th>
+      <th scope="col">content</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for article in articles %}
+    <tr>
+      <td><a href="{% url 'article:detail' article.pk %}">{{ article.title }}</a></td>
+      <td>{{ article.content }}</td>
+    </tr>
+    {% endfor %}
+      
+  </tbody>
+</table>
+
+{% endblock content %}
+  
