@@ -7,7 +7,9 @@
   <p>{{ user.username }}</p>
   <a href=" {% url 'article:create' %}">글작성하기</a>
   <a href=" {% url 'accounts:main' %}">메인으로 이동</a>
+  
   <hr>
+
   <h1>글 목록</h1>
   <p>{{ user.articles.count }} 개의 글을 작성하였습니다.</p>
   {% for article in articles %}

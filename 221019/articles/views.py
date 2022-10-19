@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ArticleForm
-from .models import Article
-
 from django.contrib.auth.decorators import login_required
+from .forms import ArticleForm, CommentForm
+from .models import Article, Comment
 
 
 
@@ -33,9 +32,12 @@ def create(request):
 
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
+    form = CommentForm()
     return render(request, 'articles/detail.html',
     {
         'article': article,
+        'form': form,
+        'comments': article.comments.order_by('-pk'),
     })
 
 
@@ -69,3 +71,27 @@ def delete(request, pk):
     else:
         from django.http import HttpResponseForbidden
         return HttpResponseForbidden()
+
+
+@login_required
+def comment_create(request, pk):
+    article = Article.objects.get(pk=pk)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        user = request.user
+        comment.user = user
+        comment.article = article
+        comment.save()
+    return redirect('article:detail', article.pk)
+
+
+@login_required
+def comment_delete(request, article_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        Comment.objects.get(pk=comment_pk).delete()
+    else:
+        from django.http import HttpResponseForbidden
+        return HttpResponseForbidden()
+    return redirect('article:detail', article_pk)

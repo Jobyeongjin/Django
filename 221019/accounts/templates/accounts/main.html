@@ -3,6 +3,7 @@
 
 
 {% block content %}
+
   <a href="{% url 'article:index' %}">글목록</a>
   
   {% if request.user.is_authenticated %}
