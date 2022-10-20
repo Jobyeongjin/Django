@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
@@ -39,15 +41,24 @@ def login(request):
     })
 
 
+@login_required
 def logout(request):
     auth_logout(request)
     return redirect('accounts:main')
 
 
+@login_required
 def detail(request, pk):
-    return render(request, 'accounts/detail.html')
+    user = get_user_model().objects.get(pk=pk)
+    return render(request, 'accounts/detail.html',
+    {
+        'user': user,
+        'articles': user.articles.all(),
+        'comments': user.comments.all(),
+    })
 
 
+@login_required
 def update(request, pk):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -62,12 +73,14 @@ def update(request, pk):
     })
 
 
+@login_required
 def delete(request, pk):
     request.user.delete()
     auth_logout(request)
     return redirect('accounts:main')
 
 
+@login_required
 def set_password(request, pk):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
