@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -48,6 +49,13 @@ def logout(request):
 
 @login_required
 def detail(request, pk):
+    user = get_user_model().objects.get(pk=pk)
+    return render(request, 'accounts/detail.html',
+    {
+        'user': user,
+        'articles': user.articles.all(),
+        'comments': user.comments.all(),
+    })
     return render(request, 'accounts/detail.html')
 
 
