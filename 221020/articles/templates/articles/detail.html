@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block content %}
+
+<h1>게시글</h1>
+<a href="{% url 'article:index' %}">목록으로 이동</a>
+{{ article.user }}님의 게시글<br/>
+{{ article.title }}<br/>
+{{ article.content }}<br/>
+<img src="{{ article.image.url }}" alt="" width="100px" height="100px"><br/>
+
+{% if request.user == article.user %}
+<a href="{% url 'article:update' article.pk %}">글 수정</a>
+<a href="{% url 'article:delete' article.pk %}">글 삭제</a>
+{% endif %}
+  
+
+<h1 class="mt-5">댓글</h1>
+<form action="{% url 'article:comment_create' article.pk %}" method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+</form>
+
+<hr>
+
+{% for comment in comments %}
+{{ comment.user }}: {{ comment.content }}<br/>
+
+{% if request.user == comment.user %}
+<a href="{% url 'article:comment_delete' article.pk comment.pk %}">삭제</a>
+{% endif %}
+  
+{% endfor %}
+  
+
+{% endblock content %}
+  
