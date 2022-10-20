@@ -7,7 +7,6 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
-
 def main(request):
     return render(request, 'accounts/main.html')
 

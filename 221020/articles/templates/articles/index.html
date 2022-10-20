@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
   
   <div class="mb-5">
     <a href="{% url 'article:create' %}">글 작성</a>
   </div>
-  
+
+  <!-- Articles -->
   {% for article in articles %}
     {{ article.title }}<br/>
     <a href="{% url 'article:detail' article.pk %}">{{ article.content }}</a>
