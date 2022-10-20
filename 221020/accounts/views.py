@@ -56,6 +56,7 @@ def detail(request, pk):
         'articles': user.articles.all(),
         'comments': user.comments.all(),
     })
+    return render(request, 'accounts/detail.html')
 
 
 @login_required

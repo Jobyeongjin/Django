@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
 
 <a href="{% url 'accounts:update' user.pk %}">회원정보 수정</a>
@@ -20,7 +19,6 @@
 {% for comment in comments %}
   {{ comment.article.user }}님의 게시글: <a href="{% url 'article:detail' comment.article.pk %}">{{ comment.content }}</a><br/>
 {% endfor %}
-  
   
 {% endblock content %}
   
