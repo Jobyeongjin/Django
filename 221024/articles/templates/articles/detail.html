@@ -21,6 +21,36 @@
       <a href="{% url 'articles:update' article.pk %}">수정하기</a>
     </p>
   {% endif %}
+  
+  <!-- Likes -->
+  <div class="d-flex align-items-center">
+    {% if request.user.is_authenticated %}
+    <div class="me-3">
+      {{ article.like_users.count }}
+    </div>
+    <form action="{% url 'articles:likes' article.pk %}" method='POST'>
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <input type="submit" value='좋아요 취소' class="btn btn-outline-secondary">
+      {% else %}
+        <input type="submit" value='좋아요' class="btn btn-outline-danger">
+      {% endif %}
+    </form>
+    {% else %}
+    <a href="{% url 'accounts:login' %}" class="btn btn-outline-warning">로그인이 필요합니다.</a>
+    <div class="mx-3">
+      {{ article.like_users.count }}
+    </div>
+    <form action="{% url 'articles:likes' article.pk %}" method='POST'>
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <input type="submit" value='좋아요 취소' class="btn btn-outline-secondary">
+      {% else %}
+        <input type="submit" value='좋아요' class="btn btn-outline-danger">
+      {% endif %}
+    </form>
+    {% endif %}
+  </div>
 
   <!-- Comment -->
   <h4 class="my-3">댓글</h4>

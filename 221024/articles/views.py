@@ -71,3 +71,17 @@ def comment_create(request, pk):
         comment.user = request.user
         comment.save()
     return redirect('articles:detail', article.pk)
+
+
+"""Likes"""
+def likes(request, pk):
+    if request.user.is_authenticated:
+        article = Article.objects.get(pk=pk)
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
+        else:
+            article.like_users.add(request.user)
+    else:
+        messages.warning(request, '좋아요는 로그인 후 이용할 수 있습니다.')
+        return redirect('articles:detail', pk)
+    return redirect('articles:detail', pk)
