@@ -59,3 +59,14 @@ def update(request):
         'form': form
     }
     return render(request, 'accounts/update.html', context)
+
+"""Follow"""
+def follow(request, pk):
+    user = get_user_model().objects.get(pk=pk)
+    if user != request.user:
+        # if request.user in user.followings.all():
+        if user.followings.filter(pk=request.user.pk).exists():
+            user.followings.remove(request.user)
+        else:
+            user.followings.add(request.user)
+    return redirect('accounts:detail', pk)

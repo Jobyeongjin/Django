@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<h1>{{ user.username }}님의 프로필</h1>
+<a href="{% url 'accounts:index' %}">back</a>
+<a href="{% url 'article:index' %}">articles</a>
+
+{% if request.user == user %}
+<a href="{% url 'accounts:logout' %}">logout</a>
+{% endif %}
+  
+
+<!-- Follow -->
+{% if request.user.is_authenticated %}
+<form action="{% url 'accounts:follow' user.pk %}" method='POST'>
+  {% csrf_token %}
+  팔로잉: {{ user.followers.count }} | 팔로워: {{ user.followings.count }}
+  {% if request.user != user %}
+    {% if request.user in user.followings.all %}
+      <input type="submit" value='팔로우 취소' class="btn btn-outline-danger">
+    {% else %}
+      <input type="submit" value='팔로우' class="btn btn-outline-success">
+    {% endif %}
+  {% endif %}
+</form>  
+{% else %}
+팔로잉: {{ user.followers.count }} | 팔로워: {{ user.followings.count }}
+<a href="{% url 'accounts:index' %}" class="btn btn-outline-secondary">로그인이 필요합니다.</a>
+{% endif %}
+
+{% if user.is_authenticated %}
+{% endif %}
+  
+
+  {% endblock content %}
+  
