@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Article
 from .forms import ArticleForm, CommentForm
+from django.http import JsonResponse
 
 
 def index(request):
@@ -79,9 +80,16 @@ def likes(request, pk):
         article = Article.objects.get(pk=pk)
         if article.like_users.filter(pk=request.user.pk).exists():
             article.like_users.remove(request.user)
+            is_liked = False
         else:
             article.like_users.add(request.user)
+            is_liked = True
     else:
         messages.warning(request, '좋아요는 로그인 후 이용할 수 있습니다.')
         return redirect('articles:detail', pk)
-    return redirect('articles:detail', pk)
+    return JsonResponse(
+        {
+            'is_liked': is_liked,
+            'like_count': article.like_users.count(),
+        }
+    )

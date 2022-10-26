@@ -26,14 +26,15 @@
   <div class="d-flex align-items-center">
     {% if request.user.is_authenticated %}
     <div class="me-3">
-      {{ article.like_users.count }}
+      <span id="like-count">{{ article.like_users.count }}</span>
     </div>
-    <form action="{% url 'articles:likes' article.pk %}" method='POST'>
-      {% csrf_token %}
+    <!-- <form action="{% url 'articles:likes' article.pk %}" method='POST'> -->
+    <form class="like-forms" data-article-id="{{ article.pk }}">
+    {% csrf_token %}
       {% if user in article.like_users.all %}
-        <input type="submit" value='좋아요 취소' class="btn btn-outline-secondary">
+        <input id="like-{{ article.pk }}" type="submit" value='좋아요 취소' class="btn">
       {% else %}
-        <input type="submit" value='좋아요' class="btn btn-outline-danger">
+        <input id="like-{{ article.pk }}" type="submit" value='좋아요' class="btn">
       {% endif %}
     </form>
     {% else %}
@@ -71,4 +72,41 @@
     {% empty %}
     <p>댓글이 없어요 ㅠ_ㅠ</p>
   {% endfor %}
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+
+    const forms = document.querySelectorAll('.like-forms')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    forms.forEach((form) => {
+      form.addEventListener('submit', function(evnet) {
+        event.preventDefault();
+        const articleId = event.target.dataset.articleId
+
+        axios({
+          method: 'post',
+          url: `http://127.0.0.1:8000/articles/${articleId}/likes/`,
+          headers: {'X-CSRFToken': csrftoken},
+        })
+          .then((response) => {
+            const isLiked = response.data.is_liked
+            const likeBtn = document.querySelector(`#like-${articleId}`)
+            const likeCountTag = document.querySelector('#like-count')
+            const likeCount = response.data.like_count
+            likeCountTag.innerText = likeCount
+            if (isLiked === true) {
+              likeBtn.value = '좋아요 취소'
+            } else {
+              likeBtn.value = '좋아요'
+            }
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+      })
+    })
+
+  </script>
 {% endblock %}
