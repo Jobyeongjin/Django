@@ -17,6 +17,8 @@
 {% if request.user.is_authenticated %}
 <!-- <form action="{% url 'accounts:follow' user.pk %}" method='POST'> -->
 <!-- axios로 요청하기 때문에, action, method 속성은 불필요함 💡 -->
+<!-- data-user-id => 요청할 때 url에서 사용할 pk 설정(임의의 데이터 특성을 만듬) 💡 -->
+<!-- MDN docs -> https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/data-* -->
 <form id="follow-form" data-user-id="{{ user.pk }}">
 {% csrf_token %}
 팔로잉: <span id="followers-count">{{ user.followers.count }}</span> | 팔로워: <span id="followings-count">{{ user.followings.count }}</span>
@@ -45,19 +47,21 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     const form = document.querySelector('#follow-form')
-    // csrf token
+    // csrf token -> input(hidden type) tag in HTML
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
     form.addEventListener('submit', function(event) {
-      // submit 이벤트 취소하기
+      // submit event stop!!!
       event.preventDefault()
       const userId = event.target.dataset.userId
 
+      // request axios
       axios({
         method: 'post',
         url: `/accounts/${userId}/follow/`,
-        headers: {'X-CSRFToken': csrftoken},
+        headers: {'X-CSRFToken': csrftoken}, // csrf token
       })
+        // response views
         .then((response) => {
           const isFollowed = response.data.is_followed
           const followBtn = document.querySelector('#follow-form > input[type=submit]')
@@ -66,6 +70,7 @@
           } else {
             followBtn.value = '팔로우'
           }
+          // follow counts
           const followersCountTag = document.querySelector('#followers-count')
           const followingsCountTag = document.querySelector('#followings-count')
           const followersCount = response.data.followers_count

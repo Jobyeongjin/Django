@@ -4,7 +4,6 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
-from django.http import JsonResponse
 
 
 def index(request):
@@ -54,18 +53,6 @@ def follow(request, pk):
     if user != request.user:
         if user.followings.filter(pk=request.user.pk).exists():
             user.followings.remove(request.user)
-            # 팔로우 여부를 확인할 변수 생성💡
-            is_followed = False
         else:
             user.followings.add(request.user)
-            # 팔로우 여부를 확인할 변수 생성💡
-            is_followed = True
-        # json response💡
-        return JsonResponse(
-            {
-                'is_followed': is_followed,
-                'followers_count': user.followers.count(),
-                'followings_count': user.followings.count(),
-            }
-        )
     return redirect('accounts:detail', pk)

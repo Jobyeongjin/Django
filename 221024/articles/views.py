@@ -80,13 +80,16 @@ def likes(request, pk):
         article = Article.objects.get(pk=pk)
         if article.like_users.filter(pk=request.user.pk).exists():
             article.like_users.remove(request.user)
+            # 좋아요 여부를 확인할 변수 생성💡
             is_liked = False
         else:
             article.like_users.add(request.user)
+            # 좋아요 여부를 확인할 변수 생성💡
             is_liked = True
     else:
         messages.warning(request, '좋아요는 로그인 후 이용할 수 있습니다.')
         return redirect('articles:detail', pk)
+    # json response💡
     return JsonResponse(
         {
             'is_liked': is_liked,

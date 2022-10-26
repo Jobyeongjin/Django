@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  
+  {% if request.user.is_authenticated %}
+  <a href="{% url 'article:index' %}">articles</a>
+  <a href="{% url 'accounts:detail' user.pk %}">detail</a>
+  <a href="{% url 'accounts:logout' %}">logout</a>
+  {% else %}
+  <a href="{% url 'article:index' %}">articles</a>
+  <a href="{% url 'accounts:login' %}">login</a>
+  <a href="{% url 'accounts:signup' %}">signup</a>
+  {% endif %}
+    
+{% endblock content %}
+  
